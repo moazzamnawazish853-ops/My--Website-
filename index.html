@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moazzam Tools & Quiz</title>
+<title>Moazzam Tools</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
@@ -19,19 +19,20 @@ nav button.active{background:#0052D4;color:#fff}
 button.btn{width:100%;padding:12px;background:#0052D4;color:#fff;border:none;border-radius:6px;margin-top:10px;font-size:16px;font-weight:bold}
 input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:5px;box-sizing:border-box}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:#eef;padding:15px;text-align:center;border-radius:8px;cursor:pointer;border:1px solid #dee}
-.q-opt{width:100%;padding:15px;margin:5px 0;background:#f9f9f9;border:1px solid #ddd;text-align:left;border-radius:5px;font-size:16px}
+.card{background:#eef;padding:15px;text-align:center;border-radius:8px;cursor:pointer}
+.result{background:#e8f5e9;padding:10px;margin-top:10px;border-radius:5px;display:none}
+.q-opt{padding:10px;border:1px solid #ddd;margin:5px 0;border-radius:5px;background:#fff}
 .q-opt.correct{background:#d4edda;border-color:green}
 .q-opt.wrong{background:#f8d7da;border-color:red}
 </style>
 </head>
 <body>
 
-<header><h1>Moazzam Tools</h1><p>Quiz • Study • Social • Utilities</p></header>
+<header><h1>Moazzam Tools</h1><p>Study • Social • Utilities</p></header>
 <nav>
  <button onclick="tab('home')" class="active">🏠 Home</button>
- <button onclick="tab('quiz')">📝 Quiz</button>
  <button onclick="tab('study')">📚 Study</button>
+ <button onclick="tab('quiz')">📝 Quiz</button>
  <button onclick="tab('social')">🔥 Social</button>
  <button onclick="tab('utils')">🛠️ Utils</button>
 </nav>
@@ -40,8 +41,8 @@ input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-r
  <div id="home" class="section active">
   <h2>🔥 Menu</h2>
   <div class="grid">
-   <div class="card" onclick="tab('quiz')">📝 Play Quiz</div>
    <div class="card" onclick="tab('study')">📚 Notes</div>
+   <div class="card" onclick="tab('quiz')">📝 Play Quiz</div>
    <div class="card" onclick="tab('tiktok')">🎵 TikTok</div>
    <div class="card" onclick="tab('currency')">💱 Currency</div>
    <div class="card" onclick="tab('age')">📅 Age</div>
@@ -51,21 +52,14 @@ input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-r
   </div>
  </div>
 
- <!-- QUIZ SECTION -->
- <div id="quiz" class="section">
-  <h2>📝 General Knowledge Quiz</h2>
-  <div id="quizBox">
-   <p id="qText" style="font-size:18px;font-weight:bold;margin-bottom:15px">Loading...</p>
-   <div id="qOpts"></div>
-   <p id="qStat" style="margin-top:10px;font-weight:bold"></p>
-   <button id="nxtBtn" class="btn" onclick="nextQ()" style="display:none">Next Question</button>
-  </div>
- </div>
-
  <div id="study" class="section">
   <h2>📚 Study Hub</h2>
   <select id="board"><option>All Pakistan</option><option>Lahore</option><option>Sahiwal</option><option>Faisalabad</option><option>Multan</option></select>
   <div class="grid"><button class="btn" onclick="findN(9)">9th</button><button class="btn" onclick="findN(10)">10th</button><button class="btn" onclick="findN(11)">11th</button><button class="btn" onclick="findN(12)">12th</button></div>
+ </div>
+ 
+ <div id="quiz" class="section">
+  <h2>📝 Quiz</h2><p id="qText">Loading...</p><div id="qOpts"></div><p id="qStat"></p><button id="nxtBtn" class="btn" onclick="nextQ()" style="display:none">Next</button>
  </div>
 
  <div id="social" class="section">
@@ -109,41 +103,22 @@ input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-r
  </div>
 </div>
 
-<script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60.js"></script>
 <script>
 function tab(id){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));window.scrollTo(0,0);if(id=='quiz')loadQ();}
 
 // QUIZ LOGIC
-const qData=[
- {q:"Capital of Pakistan?",o:["Lahore","Islamabad","Karachi","Multan"],a:1},
- {q:"Formula of Water?",o:["HO2","O2H","H2O","HHO"],a:2},
- {q:"National Poet of Pakistan?",o:["Allama Iqbal","Ghalib","Faiz","Mir"],a:0},
- {q:"Currency of USA?",o:["Euro","Pound","Dollar","Yen"],a:2},
- {q:"Unit of Force?",o:["Joule","Newton","Watt","Pascal"],a:1},
- {q:"Largest Planet?",o:["Mars","Earth","Jupiter","Venus"],a:2},
- {q:"2 + 2 / 2 = ?",o:["2","3","4","1"],a:1},
- {q:"Opposite of Hot?",o:["Cold","Warm","Fire","Ice"],a:0},
- {q:"Independence Day?",o:["14 Aug","6 Sep","23 Mar","25 Dec"],a:0},
- {q:"CPU stands for?",o:["Central Power","Central Process Unit","Control Unit"],a:1}
-];
+const qData=[{q:"Capital of Pakistan?",o:["Lahore","Islamabad","Karachi","Multan"],a:1},{q:"Formula of Water?",o:["HO2","O2H","H2O","HHO"],a:2},{q:"National Poet?",o:["Iqbal","Ghalib","Faiz"],a:0},{q:"Currency of USA?",o:["Euro","Dollar","Yen"],a:1},{q:"Unit of Force?",o:["Joule","Newton","Watt"],a:1}];
 let qI=0,score=0;
 function loadQ(){
- if(qI>=qData.length){document.getElementById('quizBox').innerHTML=`<h3>🎉 Quiz Finished!</h3><p>Score: ${score}/${qData.length}</p><button class='btn' onclick='location.reload()'>Play Again</button>`;return;}
- const q=qData[qI];
- document.getElementById('qText').innerText=(qI+1)+". "+q.q;
- const d=document.getElementById('qOpts');d.innerHTML="";
- document.getElementById('qStat').innerText="";document.getElementById('nxtBtn').style.display='none';
+ if(qI>=qData.length){document.getElementById('quiz').innerHTML=`<h3>🎉 Finished!</h3><p>Score: ${score}/${qData.length}</p><button class='btn' onclick='location.reload()'>Restart</button>`;return;}
+ const q=qData[qI];document.getElementById('qText').innerText=(qI+1)+". "+q.q;
+ const d=document.getElementById('qOpts');d.innerHTML="";document.getElementById('qStat').innerText="";document.getElementById('nxtBtn').style.display='none';
  q.o.forEach((o,i)=>{const b=document.createElement('div');b.className='q-opt';b.innerText=o;b.onclick=()=>chk(b,i,q.a);d.appendChild(b);});
 }
-function chk(el,i,ans){
- const all=document.querySelectorAll('.q-opt');all.forEach(b=>b.style.pointerEvents='none');
- if(i===ans){el.classList.add('correct');document.getElementById('qStat').innerText="Correct! ✅";score++;}
- else{el.classList.add('wrong');all[ans].classList.add('correct');document.getElementById('qStat').innerText="Wrong! ❌";}
- document.getElementById('nxtBtn').style.display='block';
-}
+function chk(el,i,ans){const all=document.querySelectorAll('.q-opt');all.forEach(b=>b.style.pointerEvents='none');if(i===ans){el.classList.add('correct');document.getElementById('qStat').innerText="Correct! ✅";score++;}else{el.classList.add('wrong');all[ans].classList.add('correct');document.getElementById('qStat').innerText="Wrong! ❌";}document.getElementById('nxtBtn').style.display='block';}
 function nextQ(){qI++;loadQ();}
 
-// OTHER TOOLS
+// TOOLS LOGIC
 function findN(c){window.open(`https://www.google.com/search?q=Class+${c}+Notes+${document.getElementById('board').value}+PDF`,'_blank');}
 async function conv(){const a=document.getElementById('amt').value,t=document.getElementById('toC').value;document.getElementById('cRes').innerText="Fetching...";try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const d=await r.json();document.getElementById('cRes').innerText=(t=='PKR'?a*d.rates.PKR:a).toFixed(2)+" "+t;}catch(e){document.getElementById('cRes').innerText="Error";}}
 function age(){const d=document.getElementById('dob').value;if(d)document.getElementById('aRes').innerText=(new Date().getFullYear()-new Date(d).getFullYear())+" Years";}
@@ -155,5 +130,9 @@ function dM(){const c=document.getElementById('mC'),x=c.getContext('2d');c.width
 function sM(){const l=document.createElement('a');l.download='meme.png';l.href=document.getElementById('mC').toDataURL();l.click();}
 function gTh(){const u=document.getElementById('ytL').value,m=u.match(/v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);if(m){document.getElementById('tI').style.display='block';document.getElementById('tI').src=`https://img.youtube.com/vi/${m[1]}/maxresdefault.jpg`;}}
 </script>
+
+<!-- ADSTERRA CODE (Yeh aapke screenshot wala code hai) -->
+<script type="text/javascript" src="//pl28183248.effectivegatecpm.com/42/bf/71/42bf714643c5b52a440c83a54d580f14.js"></script>
+
 </body>
-  </html>
+</html>
