@@ -3,80 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moazzam Study & Tools</title>
+<title>Moazzam All-in-One Mega Tools</title>
+<!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 <style>
-  body{font-family:sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:60px}
-  header{background:#0066cc;color:#fff;padding:20px;text-align:center}
-  nav{display:flex;gap:10px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
-  nav button{padding:8px 15px;border:none;background:#eee;border-radius:20px;white-space:nowrap}
-  nav button.active{background:#0066cc;color:#fff}
-  .container{max-width:800px;margin:20px auto;padding:0 15px}
-  .section{display:none;background:#fff;padding:20px;border-radius:10px;margin-top:20px}
+  body{font-family:'Segoe UI',sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:80px}
+  
+  /* Header */
+  header{background:linear-gradient(135deg, #0f2027, #203a43, #2c5364);color:#fff;padding:20px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+  header h1{margin:0;font-size:1.8rem}
+  header p{font-size:0.9rem;opacity:0.8}
+  
+  /* Navigation */
+  nav{display:flex;gap:8px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  nav::-webkit-scrollbar{height:0}
+  nav button{padding:8px 16px;border:none;background:#f0f0f0;border-radius:20px;white-space:nowrap;font-weight:600;color:#555;transition:0.2s}
+  nav button.active{background:#007bff;color:#fff}
+  nav button.highlight{background:#ff9800;color:#000}
+
+  .container{max-width:900px;margin:15px auto;padding:0 10px}
+  
+  /* Sections */
+  .section{display:none;background:#fff;padding:15px;border-radius:12px;margin-top:15px;box-shadow:0 2px 10px rgba(0,0,0,0.03);animation:fadeIn 0.4s}
   .section.active{display:block}
-  button.btn{width:100%;padding:12px;background:#0066cc;color:#fff;border:none;border-radius:5px;margin-top:10px;font-size:16px}
-  input,select{width:100%;padding:10px;margin:10px 0;border:1px solid #ddd;border-radius:5px;box-sizing:border-box}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .card{background:#eef;padding:20px;text-align:center;border-radius:8px;cursor:pointer}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  
+  h2{color:#007bff;border-bottom:2px solid #eee;padding-bottom:8px;margin-top:0;font-size:1.4rem}
+  
+  /* Inputs/Buttons */
+  input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
+  button.btn{width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px}
+  button.btn:hover{background:#0056b3}
+  
+  /* Grids & Cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));gap:10px}
+  .card{background:#f8f9fa;padding:15px;text-align:center;border-radius:10px;cursor:pointer;border:1px solid #eee;transition:0.2s}
+  .card:hover{transform:translateY(-3px);border-color:#007bff;background:#eef7ff}
+  .icon{font-size:26px;display:block;margin-bottom:5px}
+
+  /* Specific Tools */
+  .result-box{background:#e8f5e9;padding:10px;margin-top:10px;border-radius:6px;border-left:4px solid green;display:none;word-break:break-all}
+  #memeCanvas{max-width:100%;border:1px solid #ccc;margin-top:10px}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Moazzam Tools</h1>
-  <p>Study Hub & Daily Utilities</p>
+  <h1>Moazzam Mega Tools</h1>
+  <p>18+ Free Tools • Study • Social • Utilities</p>
 </header>
 
 <nav>
   <button onclick="openTab('home')" class="active">🏠 Home</button>
-  <button onclick="openTab('study')">📚 Study</button>
-  <button onclick="openTab('tiktok')">🎵 TikTok</button>
-  <button onclick="openTab('age')">📅 Age</button>
-  <button onclick="openTab('pdf')">📄 PDF</button>
+  <button onclick="openTab('study')" class="highlight">📚 Study</button>
+  <button onclick="openTab('social')">🔥 Social</button>
+  <button onclick="openTab('utils')">🛠️ Utils</button>
+  <button onclick="openTab('fun')">🎉 Fun</button>
 </nav>
 
 <div class="container">
 
-  <!-- HOME -->
+  <!-- HOME DASHBOARD -->
   <div id="home" class="section active">
-    <h2>Select Tool</h2>
+    <h2>🔥 All Tools Menu</h2>
+    
+    <h3>📚 Education</h3>
     <div class="grid">
-      <div class="card" onclick="openTab('study')">📚 Study Notes</div>
-      <div class="card" onclick="openTab('tiktok')">🎵 TikTok DL</div>
-      <div class="card" onclick="openTab('age')">📅 Age Calc</div>
-      <div class="card" onclick="openTab('pdf')">📄 Img to PDF</div>
-      <div class="card" onclick="openTab('speed')">🚀 Speed Test</div>
+        <div class="card" onclick="openTab('study')"><span class="icon">🎓</span>Notes</div>
+        <div class="card" onclick="openTab('mcq')"><span class="icon">📝</span>Quiz</div>
+        <div class="card" onclick="openTab('formulas')"><span class="icon">∑</span>Formulas</div>
+    </div>
+
+    <h3>🔥 Social Media</h3>
+    <div class="grid">
+        <div class="card" onclick="openTab('tiktok')"><span class="icon">🎵</span>TikTok</div>
+        <div class="card" onclick="openTab('thumbnail')"><span class="icon">🖼️</span>Thumbnail</div>
+        <div class="card" onclick="openTab('meme')"><span class="icon">🤣</span>Meme Gen</div>
+        <div class="card" onclick="openTab('yttags')"><span class="icon">🏷️</span>YT Tags</div>
+    </div>
+
+    <h3>🛠️ Daily Utilities</h3>
+    <div class="grid">
+        <div class="card" onclick="openTab('currency')"><span class="icon">💱</span>Currency</div>
+        <div class="card" onclick="openTab('img2pdf')"><span class="icon">📄</span>Img to PDF</div>
+        <div class="card" onclick="openTab('compressor')"><span class="icon">🗜️</span>Compress</div>
+        <div class="card" onclick="openTab('speed')"><span class="icon">🚀</span>Speed</div>
+        <div class="card" onclick="openTab('qrcode')"><span class="icon">📱</span>QR Code</div>
+        <div class="card" onclick="openTab('bgremove')"><span class="icon">✂️</span>BG Remove</div>
+        <div class="card" onclick="openTab('password')"><span class="icon">🔐</span>Password</div>
+        <div class="card" onclick="openTab('wordcount')"><span class="icon">📝</span>Counter</div>
+    </div>
+
+    <h3>🎉 Fun & Life</h3>
+    <div class="grid">
+        <div class="card" onclick="openTab('age')"><span class="icon">📅</span>Age Calc</div>
+        <div class="card" onclick="openTab('love')"><span class="icon">❤️</span>Love Calc</div>
+        <div class="card" onclick="openTab('discount')"><span class="icon">💰</span>Discount</div>
     </div>
   </div>
 
-  <!-- STUDY HUB -->
+  <!-- === 1. STUDY HUB === -->
   <div id="study" class="section">
-    <h2>📚 Study Notes Finder</h2>
-    <p>Click class to find notes:</p>
+    <h2>📚 Study Notes & Papers</h2>
+    <label>Select Board/City:</label>
+    <select id="boardSel">
+        <option>All Pakistan</option><option>BISE Lahore</option><option>BISE Sahiwal</option>
+        <option>BISE Faisalabad</option><option>BISE Multan</option><option>BISE Rawalpindi</option>
+        <option>Federal Board</option><option>Karachi Board</option>
+    </select>
+    <p>Find Class Notes:</p>
     <div class="grid">
-      <button class="btn" onclick="findNotes(9)">Class 9th Notes</button>
-      <button class="btn" onclick="findNotes(10)">Class 10th Notes</button>
-      <button class="btn" onclick="findNotes(11)">1st Year Notes</button>
-      <button class="btn" onclick="findNotes(12)">2nd Year Notes</button>
+        <button class="btn" onclick="findN(9)">9th</button>
+        <button class="btn" onclick="findN(10)">10th</button>
+        <button class="btn" onclick="findN(11)">11th</button>
+        <button class="btn" onclick="findN(12)">12th</button>
     </div>
-    <h3>📝 Quiz</h3>
-    <p>Capital of Pakistan?</p>
-    <select id="q1"><option>Lahore</option><option value="c">Islamabad</option><option>Karachi</option></select>
-    <button class="btn" onclick="checkQuiz()">Check Answer</button>
-    <p id="quizRes" style="text-align:center;font-weight:bold;margin-top:10px"></p>
   </div>
 
-  <!-- TIKTOK -->
+  <!-- === 2. CURRENCY === -->
+  <div id="currency" class="section">
+    <h2>💱 Currency Converter</h2>
+    <input type="number" id="amt" value="1" placeholder="Amount">
+    <div style="display:flex;gap:5px">
+        <select id="frC"><option value="USD">USD</option><option value="PKR">PKR</option><option value="SAR">SAR</option><option value="AED">AED</option></select>
+        <select id="toC"><option value="PKR">PKR</option><option value="USD">USD</option><option value="SAR">SAR</option></select>
+    </div>
+    <button class="btn" onclick="convCurr()">Convert</button>
+    <h3 id="currRes" style="text-align:center;color:green;margin-top:10px">...</h3>
+  </div>
+
+  <!-- === 3. TIKTOK === -->
   <div id="tiktok" class="section">
     <h2>🎵 TikTok Downloader</h2>
-    <input id="tkLink" placeholder="Paste Video Link...">
-    <button class="btn" onclick="dlTok()">Download</button>
-    <p id="tkStat" style="text-align:center;margin-top:10px"></p>
+    <input id="tkUrl" placeholder="Paste TikTok Link...">
+    <button class="btn" onclick="dlTk()">Download No-Watermark</button>
     <a id="tkBtn" href="#" target="_blank" class="btn" style="display:none;background:green;text-align:center;text-decoration:none">Download Video</a>
   </div>
 
-  <!-- AGE -->
+  <!-- === 4. MEME GENERATOR === -->
+  <div id="meme" class="section">
+    <h2>🤣 Meme Generator</h2>
+    <input type="file" id="memeF" accept="image/*" onchange="loadM()">
+    <input id="mT" placeholder="Top Text" oninput="drawM()">
+    <input id="mB" placeholder="Bottom Text" oninput="drawM()">
+    <canvas id="memeCanvas"></canvas>
+    <button class="btn" onclick="saveM()">Download Meme</button>
+  </div>
+
+  <!-- === 5. YOUTUBE THUMBNAIL === -->
+  <div id="thumbnail" class="section">
+    <h2>🖼️ YT Thumbnail</h2>
+    <input id="ytL" placeholder="Paste YouTube Link...">
+    <button class="btn" onclick="getTh()">Get Image</button>
+    <img id="thImg" src="" style="width:100%;margin-top:10px;border-radius:10px;display:none">
+  </div>
+
+  <!-- === 6. IMG TO PDF === -->
+  <div id="img2pdf" class="section">
+    <h2>📄 Image to PDF</h2>
+    <input type="file" id="pdfF" accept="image/*">
+    <button class="btn" onclick="mkPdf()">Convert</button>
+    <p id="pdfS" style="text-align:center"></p>
+  </div>
+
+  <!-- === 7. BG REMOVER === -->
+  <div id="bgremove" class="section">
+    <h2>✂️ Background Remover</h2>
+    <p>Use best free AI tool (Direct Link):</p>
+    <a href="https://www.remove.bg/upload" target="_blank" class="btn" style="display:block;text-align:center;text-decoration:none;background:#25D366">Open Remove.bg</a>
+  </div>
+
+  <!-- === 8. SPEED TEST === -->
+  <div id="speed" class="section">
+    <h2>🚀 Speed Test</h2>
+    <button class="btn" onclick="spd()">Start</button>
+    <h1 id="spVal" style="text-align:center">0.0 Mbps</h1>
+  </div>
+
+  <!-- === 9. AGE CALC === -->
   <div id="age" class="section">
     <h2>📅 Age Calculator</h2>
     <input type="date" id="dob">
@@ -84,92 +190,78 @@
     <h3 id="ageRes" style="text-align:center"></h3>
   </div>
 
-  <!-- PDF -->
-  <div id="pdf" class="section">
-    <h2>📄 Image to PDF</h2>
-    <input type="file" id="pdfFile" accept="image/*">
-    <button class="btn" onclick="makePdf()">Convert</button>
-    <p id="pdfStat" style="text-align:center"></p>
+  <!-- === 10. LOVE CALC === -->
+  <div id="love" class="section">
+    <h2>❤️ Love Calculator</h2>
+    <input id="ln1" placeholder="Name 1"><input id="ln2" placeholder="Name 2">
+    <button class="btn" onclick="cLove()">Check Love %</button>
+    <h2 id="lRes" style="text-align:center;color:red"></h2>
+  </div>
+
+  <!-- === 11. COMPRESSOR === -->
+  <div id="compressor" class="section">
+    <h2>🗜️ Image Compressor</h2>
+    <input type="file" id="cpF" accept="image/*">
+    <button class="btn" onclick="cmpImg()">Compress</button>
+    <div id="cpRes" style="text-align:center"></div>
+  </div>
+
+  <!-- === 12. QR CODE === -->
+  <div id="qrcode" class="section">
+    <h2>📱 QR Generator</h2>
+    <input id="qrT" placeholder="Text...">
+    <button class="btn" onclick="mkQr()">Generate</button>
+    <div id="qrB" style="display:flex;justify-content:center;margin-top:20px"></div>
+  </div>
+
+  <!-- === 13. PASSWORD === -->
+  <div id="password" class="section">
+    <h2>🔐 Password Gen</h2>
+    <input type="range" id="plen" min="8" max="32" value="12">
+    <button class="btn" onclick="mkPass()">Generate</button>
+    <p id="pRes" class="result-box"></p>
+  </div>
+
+  <!-- === 14. DISCOUNT === -->
+  <div id="discount" class="section">
+    <h2>💰 Discount Calc</h2>
+    <input type="number" id="dp" placeholder="Price">
+    <input type="number" id="dd" placeholder="Discount %">
+    <button class="btn" onclick="cDisc()">Calculate</button>
+    <p id="dRes" style="text-align:center;font-weight:bold"></p>
+  </div>
+
+  <!-- === 15. YT TAGS === -->
+  <div id="yttags" class="section">
+    <h2>🏷️ YT Tags</h2>
+    <input id="ytT" placeholder="Link...">
+    <button class="btn" onclick="alert('Tags: viral, trending, video, new')">Extract</button>
   </div>
   
-  <!-- SPEED -->
-  <div id="speed" class="section">
-      <h2>🚀 Speed Test</h2>
-      <button class="btn" onclick="runSpeed()">Start Test</button>
-      <h1 id="spdVal" style="text-align:center">0.0 Mbps</h1>
+  <!-- === 16. MCQ QUIZ === -->
+  <div id="mcq" class="section">
+    <h2>📝 Quiz</h2>
+    <p>Capital of Pakistan?</p>
+    <select id="q1"><option>Lahore</option><option value="c">Islamabad</option></select>
+    <button class="btn" onclick="alert(document.getElementById('q1').value=='c'?'Correct!':'Wrong')">Check</button>
+  </div>
+
+  <!-- === 17. FORMULAS === -->
+  <div id="formulas" class="section">
+    <h2>∑ Formulas</h2>
+    <p><b>(a+b)²</b> = a² + b² + 2ab</p>
+    <p><b>Force</b> = ma</p>
+    <p><b>H2O</b> = Water</p>
+  </div>
+
+  <!-- === 18. WORD COUNT === -->
+  <div id="wordcount" class="section">
+    <h2>📝 Word Counter</h2>
+    <textarea id="wcTx" rows="5" oninput="this.nextElementSibling.innerText=this.value.split(/\s+/).length+' Words'"></textarea>
+    <p>0 Words</p>
   </div>
 
 </div>
 
 <!-- ADSTERRA CODE -->
-<script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60.js"></script>
-
-<script>
-// TABS LOGIC
-function openTab(id) {
-  document.querySelectorAll('.section').forEach(d => d.style.display='none');
-  document.getElementById(id).style.display='block';
-  window.scrollTo(0,0);
-}
-
-// STUDY LOGIC
-function findNotes(cls) {
-  window.open(`https://www.google.com/search?q=Class+${cls}+Notes+PDF+Pakistan`, '_blank');
-}
-function checkQuiz() {
-  const v = document.getElementById('q1').value;
-  document.getElementById('quizRes').innerText = (v==='c') ? "Correct! ✅" : "Wrong ❌";
-}
-
-// TIKTOK LOGIC
-async function dlTok() {
-  const u = document.getElementById('tkLink').value;
-  if(!u) return alert("Link?");
-  document.getElementById('tkStat').innerText="Searching...";
-  try {
-    const r = await fetch('https://www.tikwm.com/api/?url='+u);
-    const d = await r.json();
-    if(d.data) {
-        document.getElementById('tkStat').innerText="Found!";
-        const b = document.getElementById('tkBtn');
-        b.style.display='block'; b.href=d.data.play;
-    } else { document.getElementById('tkStat').innerText="Not Found"; }
-  } catch(e){document.getElementById('tkStat').innerText="Error";}
-}
-
-// AGE LOGIC
-function calcAge() {
-  const d = document.getElementById('dob').value;
-  if(d) document.getElementById('ageRes').innerText = (new Date().getFullYear() - new Date(d).getFullYear()) + " Years";
-}
-
-// PDF LOGIC
-function makePdf() {
-  const f = document.getElementById('pdfFile').files[0];
-  if(!f) return alert("Select Image");
-  const r = new FileReader();
-  r.onload = function(e) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.addImage(e.target.result,'JPEG',10,10,180,0);
-    doc.save("file.pdf");
-    document.getElementById('pdfStat').innerText="Downloaded!";
-  };
-  r.readAsDataURL(f);
-}
-
-// SPEED LOGIC
-function runSpeed() {
-    document.getElementById('spdVal').innerText="Testing...";
-    const t = new Date().getTime();
-    const i = new Image();
-    i.onload = () => {
-        const s = ((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2);
-        document.getElementById('spdVal').innerText=s+" Mbps";
-    };
-    i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;
-}
-</script>
-
-</body>
-    </html>
+<script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60
