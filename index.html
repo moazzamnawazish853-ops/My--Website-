@@ -3,147 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moazzam Mega Tools</title>
-<!-- Libraries -->
+<title>Moazzam Tools & Quiz</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 <style>
-  body{font-family:'Segoe UI',sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:80px}
-  header{background:linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);color:#fff;padding:20px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
-  nav{display:flex;gap:8px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  nav button{padding:8px 16px;border:none;background:#f0f0f0;border-radius:20px;white-space:nowrap;font-weight:600;color:#555}
-  nav button.active{background:#0052D4;color:#fff}
-  .container{max-width:900px;margin:15px auto;padding:0 10px}
-  .section{display:none;background:#fff;padding:15px;border-radius:12px;margin-top:15px;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
-  .section.active{display:block}
-  h2{color:#0052D4;border-bottom:2px solid #eee;padding-bottom:8px;margin-top:0}
-  input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
-  button.btn{width:100%;padding:12px;background:#0052D4;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));gap:10px}
-  .card{background:#f8f9fa;padding:15px;text-align:center;border-radius:10px;cursor:pointer;border:1px solid #eee}
-  .icon{font-size:26px;display:block;margin-bottom:5px}
-  .result-box{background:#e8f5e9;padding:10px;margin-top:10px;border-radius:6px;border-left:4px solid green;display:none;word-break:break-all}
-  #memeCanvas{max-width:100%;border:1px solid #ccc;margin-top:10px}
+body{font-family:sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:80px}
+header{background:linear-gradient(135deg,#0052D4,#4364F7);color:#fff;padding:20px;text-align:center}
+nav{display:flex;gap:10px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;z-index:99;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+nav button{padding:8px 15px;border:none;background:#eee;border-radius:20px;white-space:nowrap;font-weight:bold}
+nav button.active{background:#0052D4;color:#fff}
+.container{max-width:850px;margin:20px auto;padding:0 10px}
+.section{display:none;background:#fff;padding:15px;border-radius:10px;margin-top:15px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.section.active{display:block}
+button.btn{width:100%;padding:12px;background:#0052D4;color:#fff;border:none;border-radius:6px;margin-top:10px;font-size:16px;font-weight:bold}
+input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:5px;box-sizing:border-box}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#eef;padding:15px;text-align:center;border-radius:8px;cursor:pointer;border:1px solid #dee}
+.q-opt{width:100%;padding:15px;margin:5px 0;background:#f9f9f9;border:1px solid #ddd;text-align:left;border-radius:5px;font-size:16px}
+.q-opt.correct{background:#d4edda;border-color:green}
+.q-opt.wrong{background:#f8d7da;border-color:red}
 </style>
 </head>
 <body>
 
-<header><h1>Moazzam Mega Tools</h1><p>18+ Free Tools • Study • Social • Utilities</p></header>
+<header><h1>Moazzam Tools</h1><p>Quiz • Study • Social • Utilities</p></header>
 <nav>
-  <button onclick="openTab('home')" class="active">🏠 Home</button>
-  <button onclick="openTab('study')">📚 Study</button>
-  <button onclick="openTab('social')">🔥 Social</button>
-  <button onclick="openTab('utils')">🛠️ Utils</button>
+ <button onclick="tab('home')" class="active">🏠 Home</button>
+ <button onclick="tab('quiz')">📝 Quiz</button>
+ <button onclick="tab('study')">📚 Study</button>
+ <button onclick="tab('social')">🔥 Social</button>
+ <button onclick="tab('utils')">🛠️ Utils</button>
 </nav>
 
 <div class="container">
-  <!-- HOME -->
-  <div id="home" class="section active">
-    <h2>🔥 All Tools</h2>
-    <h3>📚 Education</h3>
-    <div class="grid">
-        <div class="card" onclick="openTab('study')"><span class="icon">🎓</span>Notes</div>
-        <div class="card" onclick="openTab('mcq')"><span class="icon">📝</span>Quiz</div>
-        <div class="card" onclick="openTab('formulas')"><span class="icon">∑</span>Formulas</div>
-    </div>
-    <h3>🔥 Social</h3>
-    <div class="grid">
-        <div class="card" onclick="openTab('tiktok')"><span class="icon">🎵</span>TikTok</div>
-        <div class="card" onclick="openTab('thumbnail')"><span class="icon">🖼️</span>Thumbnail</div>
-        <div class="card" onclick="openTab('meme')"><span class="icon">🤣</span>Meme Gen</div>
-    </div>
-    <h3>🛠️ Utils</h3>
-    <div class="grid">
-        <div class="card" onclick="openTab('currency')"><span class="icon">💱</span>Currency</div>
-        <div class="card" onclick="openTab('img2pdf')"><span class="icon">📄</span>PDF</div>
-        <div class="card" onclick="openTab('speed')"><span class="icon">🚀</span>Speed</div>
-        <div class="card" onclick="openTab('bgremove')"><span class="icon">✂️</span>BG Remove</div>
-        <div class="card" onclick="openTab('age')"><span class="icon">📅</span>Age</div>
-    </div>
+ <div id="home" class="section active">
+  <h2>🔥 Menu</h2>
+  <div class="grid">
+   <div class="card" onclick="tab('quiz')">📝 Play Quiz</div>
+   <div class="card" onclick="tab('study')">📚 Notes</div>
+   <div class="card" onclick="tab('tiktok')">🎵 TikTok</div>
+   <div class="card" onclick="tab('currency')">💱 Currency</div>
+   <div class="card" onclick="tab('age')">📅 Age</div>
+   <div class="card" onclick="tab('pdf')">📄 PDF</div>
+   <div class="card" onclick="tab('speed')">🚀 Speed</div>
+   <div class="card" onclick="tab('meme')">🤣 Meme</div>
   </div>
+ </div>
 
-  <!-- TOOLS HTML -->
-  <div id="study" class="section">
-    <h2>📚 Study Notes</h2>
-    <select id="boardSel"><option>All Pakistan</option><option>Lahore</option><option>Sahiwal</option><option>Faisalabad</option><option>Multan</option><option>Rawalpindi</option><option>Karachi</option></select>
-    <div class="grid"><button class="btn" onclick="findN(9)">9th</button><button class="btn" onclick="findN(10)">10th</button><button class="btn" onclick="findN(11)">11th</button><button class="btn" onclick="findN(12)">12th</button></div>
+ <!-- QUIZ SECTION -->
+ <div id="quiz" class="section">
+  <h2>📝 General Knowledge Quiz</h2>
+  <div id="quizBox">
+   <p id="qText" style="font-size:18px;font-weight:bold;margin-bottom:15px">Loading...</p>
+   <div id="qOpts"></div>
+   <p id="qStat" style="margin-top:10px;font-weight:bold"></p>
+   <button id="nxtBtn" class="btn" onclick="nextQ()" style="display:none">Next Question</button>
   </div>
+ </div>
 
-  <div id="currency" class="section">
-    <h2>💱 Currency Converter</h2>
-    <input type="number" id="amt" value="1"><select id="toC"><option value="PKR">to PKR</option><option value="USD">to USD</option></select>
-    <button class="btn" onclick="convCurr()">Convert</button><h3 id="currRes">...</h3>
-  </div>
+ <div id="study" class="section">
+  <h2>📚 Study Hub</h2>
+  <select id="board"><option>All Pakistan</option><option>Lahore</option><option>Sahiwal</option><option>Faisalabad</option><option>Multan</option></select>
+  <div class="grid"><button class="btn" onclick="findN(9)">9th</button><button class="btn" onclick="findN(10)">10th</button><button class="btn" onclick="findN(11)">11th</button><button class="btn" onclick="findN(12)">12th</button></div>
+ </div>
 
-  <div id="tiktok" class="section">
-    <h2>🎵 TikTok Downloader</h2>
-    <input id="tkUrl" placeholder="Link..."><button class="btn" onclick="dlTk()">Download</button>
-    <a id="tkBtn" href="#" target="_blank" class="btn" style="display:none;background:green;text-align:center;text-decoration:none">Download Video</a>
-  </div>
+ <div id="social" class="section">
+  <h2>🔥 Social Tools</h2>
+  <div class="grid"><div class="card" onclick="tab('tiktok')">🎵 TikTok</div><div class="card" onclick="tab('thumbnail')">🖼️ Thumbnail</div><div class="card" onclick="tab('meme')">🤣 Meme</div></div>
+ </div>
 
-  <div id="meme" class="section">
-    <h2>🤣 Meme Generator</h2>
-    <input type="file" id="memeF" accept="image/*" onchange="loadM()">
-    <input id="mT" placeholder="Top" oninput="drawM()"><input id="mB" placeholder="Bottom" oninput="drawM()">
-    <canvas id="memeCanvas"></canvas><button class="btn" onclick="saveM()">Download</button>
-  </div>
+ <div id="utils" class="section">
+  <h2>🛠️ Utilities</h2>
+  <div class="grid"><div class="card" onclick="tab('currency')">💱 Currency</div><div class="card" onclick="tab('age')">📅 Age</div><div class="card" onclick="tab('pdf')">📄 PDF</div></div>
+ </div>
 
-  <div id="thumbnail" class="section">
-    <h2>🖼️ Thumbnail</h2><input id="ytL" placeholder="YouTube Link..."><button class="btn" onclick="getTh()">Get</button><img id="thImg" src="" style="width:100%;display:none">
-  </div>
+ <div id="tiktok" class="section">
+  <h2>🎵 TikTok DL</h2><input id="tkU" placeholder="Link..."><button class="btn" onclick="dlTk()">Download</button>
+  <a id="tkB" href="#" target="_blank" class="btn" style="display:none;background:green;text-align:center;text-decoration:none">Download Video</a>
+ </div>
 
-  <div id="img2pdf" class="section">
-    <h2>📄 Img to PDF</h2><input type="file" id="pdfF" accept="image/*"><button class="btn" onclick="mkPdf()">Convert</button><p id="pdfS"></p>
-  </div>
+ <div id="currency" class="section">
+  <h2>💱 Currency</h2><input type="number" id="amt" value="1"><select id="toC"><option value="PKR">to PKR</option><option value="USD">to USD</option></select>
+  <button class="btn" onclick="conv()">Convert</button><h3 id="cRes">...</h3>
+ </div>
 
-  <div id="bgremove" class="section">
-    <h2>✂️ BG Remover</h2><a href="https://www.remove.bg/upload" target="_blank" class="btn" style="text-decoration:none;display:block;text-align:center;background:#25D366">Open Tool</a>
-  </div>
+ <div id="age" class="section">
+  <h2>📅 Age Calc</h2><input type="date" id="dob"><button class="btn" onclick="age()">Calculate</button><h3 id="aRes"></h3>
+ </div>
 
-  <div id="speed" class="section">
-    <h2>🚀 Speed Test</h2><button class="btn" onclick="spd()">Start</button><h1 id="spVal" style="text-align:center">0.0</h1>
-  </div>
+ <div id="pdf" class="section">
+  <h2>📄 Img to PDF</h2><input type="file" id="ipdf" accept="image/*"><button class="btn" onclick="pdf()">Convert</button><p id="pStat"></p>
+ </div>
 
-  <div id="age" class="section">
-    <h2>📅 Age Calc</h2><input type="date" id="dob"><button class="btn" onclick="calcAge()">Calc</button><h3 id="ageRes"></h3>
-  </div>
+ <div id="speed" class="section">
+  <h2>🚀 Speed Test</h2><button class="btn" onclick="spd()">Start</button><h2 id="sVal">0.0 Mbps</h2>
+ </div>
 
-  <div id="mcq" class="section">
-    <h2>📝 Quiz</h2><p>Capital of Pakistan?</p><select id="q1"><option>Lahore</option><option value="c">Islamabad</option></select><button class="btn" onclick="alert(document.getElementById('q1').value=='c'?'Correct':'Wrong')">Check</button>
-  </div>
+ <div id="meme" class="section">
+  <h2>🤣 Meme Gen</h2><input type="file" id="mF" onchange="lM()"><input id="mT" placeholder="Top" oninput="dM()"><input id="mB" placeholder="Bottom" oninput="dM()"><canvas id="mC" style="width:100%;border:1px solid #ddd"></canvas><button class="btn" onclick="sM()">Download</button>
+ </div>
 
-  <div id="formulas" class="section">
-    <h2>∑ Formulas</h2><p><b>(a+b)²</b> = a² + b² + 2ab</p><p><b>Force</b> = ma</p>
-  </div>
-    </div>
-    <!-- ADSTERRA -->
+ <div id="thumbnail" class="section">
+  <h2>🖼️ Thumbnail</h2><input id="ytL" placeholder="Link..."><button class="btn" onclick="gTh()">Get</button><img id="tI" src="" style="width:100%;display:none">
+ </div>
+</div>
+
 <script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60.js"></script>
-
 <script>
-function openTab(id){
-    document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-    window.scrollTo(0,0);
+function tab(id){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));window.scrollTo(0,0);if(id=='quiz')loadQ();}
+
+// QUIZ LOGIC
+const qData=[
+ {q:"Capital of Pakistan?",o:["Lahore","Islamabad","Karachi","Multan"],a:1},
+ {q:"Formula of Water?",o:["HO2","O2H","H2O","HHO"],a:2},
+ {q:"National Poet of Pakistan?",o:["Allama Iqbal","Ghalib","Faiz","Mir"],a:0},
+ {q:"Currency of USA?",o:["Euro","Pound","Dollar","Yen"],a:2},
+ {q:"Unit of Force?",o:["Joule","Newton","Watt","Pascal"],a:1},
+ {q:"Largest Planet?",o:["Mars","Earth","Jupiter","Venus"],a:2},
+ {q:"2 + 2 / 2 = ?",o:["2","3","4","1"],a:1},
+ {q:"Opposite of Hot?",o:["Cold","Warm","Fire","Ice"],a:0},
+ {q:"Independence Day?",o:["14 Aug","6 Sep","23 Mar","25 Dec"],a:0},
+ {q:"CPU stands for?",o:["Central Power","Central Process Unit","Control Unit"],a:1}
+];
+let qI=0,score=0;
+function loadQ(){
+ if(qI>=qData.length){document.getElementById('quizBox').innerHTML=`<h3>🎉 Quiz Finished!</h3><p>Score: ${score}/${qData.length}</p><button class='btn' onclick='location.reload()'>Play Again</button>`;return;}
+ const q=qData[qI];
+ document.getElementById('qText').innerText=(qI+1)+". "+q.q;
+ const d=document.getElementById('qOpts');d.innerHTML="";
+ document.getElementById('qStat').innerText="";document.getElementById('nxtBtn').style.display='none';
+ q.o.forEach((o,i)=>{const b=document.createElement('div');b.className='q-opt';b.innerText=o;b.onclick=()=>chk(b,i,q.a);d.appendChild(b);});
 }
-// Logic
-async function convCurr(){
-    const a=document.getElementById('amt').value, t=document.getElementById('toC').value;
-    document.getElementById('currRes').innerText="Fetching...";
-    try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const d=await r.json();
-    document.getElementById('currRes').innerText=(t=='PKR'?a*d.rates.PKR:a).toFixed(2)+" "+t;}catch(e){document.getElementById('currRes').innerText="Error";}
+function chk(el,i,ans){
+ const all=document.querySelectorAll('.q-opt');all.forEach(b=>b.style.pointerEvents='none');
+ if(i===ans){el.classList.add('correct');document.getElementById('qStat').innerText="Correct! ✅";score++;}
+ else{el.classList.add('wrong');all[ans].classList.add('correct');document.getElementById('qStat').innerText="Wrong! ❌";}
+ document.getElementById('nxtBtn').style.display='block';
 }
-let mImg=new Image();
-function loadM(){const f=document.getElementById('memeF').files[0];if(f){const r=new FileReader();r.onload=(e)=>{mImg.src=e.target.result;mImg.onload=drawM};r.readAsDataURL(f);}}
-function drawM(){const c=document.getElementById('memeCanvas'),x=c.getContext('2d');c.width=400;c.height=400*(mImg.height/mImg.width);x.drawImage(mImg,0,0,c.width,c.height);x.font='30px Impact';x.fillStyle='white';x.strokeStyle='black';x.textAlign='center';x.fillText(document.getElementById('mT').value.toUpperCase(),200,40);x.strokeText(document.getElementById('mT').value.toUpperCase(),200,40);x.fillText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);x.strokeText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);}
-function saveM(){const l=document.createElement('a');l.download='meme.png';l.href=document.getElementById('memeCanvas').toDataURL();l.click();}
-async function dlTk(){const u=document.getElementById('tkUrl').value;if(!u)return;try{const r=await fetch('https://www.tikwm.com/api/?url='+u);const d=await r.json();if(d.data){document.getElementById('tkBtn').style.display='block';document.getElementById('tkBtn').href=d.data.play;}}catch(e){}}
-function getTh(){const u=document.getElementById('ytL').value,m=u.match(/v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);if(m){document.getElementById('thImg').style.display='block';document.getElementById('thImg').src=`https://img.youtube.com/vi/${m[1]}/maxresdefault.jpg`;}}
-function findN(c){window.open(`https://www.google.com/search?q=Class+${c}+Notes+${document.getElementById('boardSel').value}+PDF`,'_blank');}
-function mkPdf(){const f=document.getElementById('pdfF').files[0];if(f){const r=new FileReader();r.onload=(e)=>{const {jsPDF}=window.jspdf;const d=new jsPDF();d.addImage(e.target.result,'JPEG',10,10,180,0);d.save("file.pdf");document.getElementById('pdfS').innerText="Done!";};r.readAsDataURL(f);}}
-function spd(){document.getElementById('spVal').innerText="Testing...";const t=new Date().getTime(),i=new Image();i.onload=()=>{document.getElementById('spVal').innerText=((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2)+" Mbps";};i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;}
-function calcAge(){const d=document.getElementById('dob').value;if(d)document.getElementById('ageRes').innerText=(new Date().getFullYear()-new Date(d).getFullYear())+" Years";}
+function nextQ(){qI++;loadQ();}
+
+// OTHER TOOLS
+function findN(c){window.open(`https://www.google.com/search?q=Class+${c}+Notes+${document.getElementById('board').value}+PDF`,'_blank');}
+async function conv(){const a=document.getElementById('amt').value,t=document.getElementById('toC').value;document.getElementById('cRes').innerText="Fetching...";try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const d=await r.json();document.getElementById('cRes').innerText=(t=='PKR'?a*d.rates.PKR:a).toFixed(2)+" "+t;}catch(e){document.getElementById('cRes').innerText="Error";}}
+function age(){const d=document.getElementById('dob').value;if(d)document.getElementById('aRes').innerText=(new Date().getFullYear()-new Date(d).getFullYear())+" Years";}
+function spd(){document.getElementById('sVal').innerText="Testing...";const t=new Date().getTime(),i=new Image();i.onload=()=>{document.getElementById('sVal').innerText=((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2)+" Mbps";};i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;}
+async function dlTk(){const u=document.getElementById('tkU').value;if(!u)return;try{const r=await fetch('https://www.tikwm.com/api/?url='+u);const d=await r.json();if(d.data){document.getElementById('tkB').style.display='block';document.getElementById('tkB').href=d.data.play;}}catch(e){}}
+function pdf(){const f=document.getElementById('ipdf').files[0];if(f){const r=new FileReader();r.onload=(e)=>{const {jsPDF}=window.jspdf;const d=new jsPDF();d.addImage(e.target.result,'JPEG',10,10,180,0);d.save("file.pdf");document.getElementById('pStat').innerText="Done!";};r.readAsDataURL(f);}}
+let mI=new Image();function lM(){const f=document.getElementById('mF').files[0];if(f){const r=new FileReader();r.onload=(e)=>{mI.src=e.target.result;mI.onload=dM};r.readAsDataURL(f);}}
+function dM(){const c=document.getElementById('mC'),x=c.getContext('2d');c.width=400;c.height=400*(mI.height/mI.width);x.drawImage(mI,0,0,c.width,c.height);x.font='30px Impact';x.fillStyle='white';x.strokeStyle='black';x.textAlign='center';x.fillText(document.getElementById('mT').value.toUpperCase(),200,40);x.strokeText(document.getElementById('mT').value.toUpperCase(),200,40);x.fillText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);x.strokeText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);}
+function sM(){const l=document.createElement('a');l.download='meme.png';l.href=document.getElementById('mC').toDataURL();l.click();}
+function gTh(){const u=document.getElementById('ytL').value,m=u.match(/v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);if(m){document.getElementById('tI').style.display='block';document.getElementById('tI').src=`https://img.youtube.com/vi/${m[1]}/maxresdefault.jpg`;}}
 </script>
 </body>
-</html>
+  </html>
