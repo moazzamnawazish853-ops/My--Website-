@@ -1,461 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Study Notes, Past Papers, MCQs, Formulas and Online Tools for Students.">
-    <title>Moazzam Study & Tools Hub</title>
-    
-    <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-
-    <style>
-        :root {
-            --primary: #2563eb; /* Royal Blue */
-            --secondary: #1e40af;
-            --accent: #f59e0b; /* Amber */
-            --bg: #f3f4f6;
-            --text: #1f2937;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            padding-bottom: 60px;
-        }
-
-        /* HEADER */
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white; padding: 2rem 1rem; text-align: center;
-        }
-        header h1 { margin: 0; font-size: 2rem; }
-        header p { margin-top: 5px; opacity: 0.9; }
-
-        /* NAVIGATION */
-        nav {
-            display: flex; gap: 10px; padding: 12px;
-            background: white; overflow-x: auto;
-            position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        nav button {
-            border: none; background: #e5e7eb; padding: 8px 16px;
-            border-radius: 20px; white-space: nowrap; cursor: pointer;
-            font-weight: 600; color: #4b5563; font-size: 0.9rem;
-        }
-        nav button.active { background: var(--primary); color: white; }
-        nav button.highlight { background: var(--accent); color: black; }
-
-        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
-
-        .tool-section {
-            display: none; background: white; padding: 20px;
-            border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            animation: slideUp 0.3s ease-out;
-        }
-        .tool-section.active { display: block; }
-        @keyframes slideUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-        h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: var(--primary); margin-top:0; }
-        h3 { margin-top: 20px; color: #333; }
-
-        /* BUTTONS & INPUTS */
-        input, select, textarea {
-            width: 100%; padding: 12px; margin: 8px 0;
-            border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;
-        }
-        button.action-btn {
-            width: 100%; padding: 14px; border: none;
-            background: var(--primary); color: white;
-            font-size: 16px; font-weight: bold; border-radius: 6px;
-            cursor: pointer; margin-top: 10px; transition: 0.2s;
-        }
-        button.action-btn:hover { background: var(--secondary); }
-
-        /* STUDY TABLE STYLES */
-        .class-selector { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .class-btn {
-            flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px;
-            background: #f9fafb; cursor: pointer; text-align: center; font-weight: bold;
-        }
-        .class-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
-        
-        .subject-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px; border-bottom: 1px solid #eee;
-        }
-        .subject-row:last-child { border-bottom: none; }
-        .dwn-btn {
-            background: #10b981; color: white; text-decoration: none;
-            padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; font-weight: bold;
-        }
-        .view-btn {
-            background: #6366f1; color: white; text-decoration: none;
-            padding: 8px 15px; border-radius: 5px; font-size: 0.9rem; font-weight: bold; margin-right:5px;
-        }
-
-        /* FORMULAS */
-        .formula-card {
-            background: #fffbeb; border-left: 5px solid var(--accent);
-            padding: 15px; margin-bottom: 10px; font-family: 'Courier New', monospace;
-        }
-
-        /* MCQ QUIZ */
-        .quiz-opt {
-            width: 100%; padding: 15px; margin: 5px 0;
-            background: white; border: 1px solid #ddd; border-radius: 8px;
-            text-align: left; cursor: pointer; transition: 0.2s;
-        }
-        .quiz-opt:hover { background: #f3f4f6; }
-        .quiz-opt.correct { background: #d1fae5; border-color: #34d399; }
-        .quiz-opt.wrong { background: #fee2e2; border-color: #f87171; }
-
-        /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
-        .card { 
-            background: white; padding: 15px; border-radius: 10px; 
-            text-align: center; border: 1px solid #eee; cursor: pointer;
-        }
-        .card:hover { border-color: var(--primary); transform: translateY(-2px); }
-        .icon { font-size: 24px; display: block; margin-bottom: 5px; }
-
-        footer { text-align: center; margin-top: 40px; color: #6b7280; font-size: 0.9rem; }
-        footer a { color: var(--primary); text-decoration: none; margin: 0 5px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moazzam Study & Tools</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body{font-family:sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:60px}
+  header{background:#0066cc;color:#fff;padding:20px;text-align:center}
+  nav{display:flex;gap:10px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+  nav button{padding:8px 15px;border:none;background:#eee;border-radius:20px;white-space:nowrap}
+  nav button.active{background:#0066cc;color:#fff}
+  .container{max-width:800px;margin:20px auto;padding:0 15px}
+  .section{display:none;background:#fff;padding:20px;border-radius:10px;margin-top:20px}
+  .section.active{display:block}
+  button.btn{width:100%;padding:12px;background:#0066cc;color:#fff;border:none;border-radius:5px;margin-top:10px;font-size:16px}
+  input,select{width:100%;padding:10px;margin:10px 0;border:1px solid #ddd;border-radius:5px;box-sizing:border-box}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .card{background:#eef;padding:20px;text-align:center;border-radius:8px;cursor:pointer}
+</style>
 </head>
 <body>
 
 <header>
-    <h1>Moazzam Study & Tools</h1>
-    <p>Complete Study Resource & Daily Utilities</p>
+  <h1>Moazzam Tools</h1>
+  <p>Study Hub & Daily Utilities</p>
 </header>
 
 <nav>
-    <button onclick="show('home')" class="active">🏠 Home</button>
-    <button onclick="show('study')" class="highlight">📚 Study Hub</button>
-    <button onclick="show('formulas')">∑ Formulas</button>
-    <button onclick="show('mcq')">📝 Quiz</button>
-    <button onclick="show('tiktok')">🎵 TikTok</button>
-    <button onclick="show('speedtest')">🚀 Speed</button>
-    <button onclick="show('more')">➕ More</button>
+  <button onclick="openTab('home')" class="active">🏠 Home</button>
+  <button onclick="openTab('study')">📚 Study</button>
+  <button onclick="openTab('tiktok')">🎵 TikTok</button>
+  <button onclick="openTab('age')">📅 Age</button>
+  <button onclick="openTab('pdf')">📄 PDF</button>
 </nav>
 
 <div class="container">
 
-    <!-- HOME PAGE -->
-    <div id="home" class="tool-section active">
-        <div style="background:#e0f2fe; padding:20px; border-radius:10px; text-align:center; margin-bottom:20px;">
-            <h3 style="margin-top:0; color:#0369a1;">🎓 Student Section is Live!</h3>
-            <p>Get Notes, Past Papers, and Formulas for Class 9th to 12th.</p>
-            <button class="action-btn" onclick="show('study')" style="width:auto; padding:10px 30px;">Open Study Hub</button>
-        </div>
-
-        <h2>🔥 Quick Tools</h2>
-        <div class="grid">
-            <div class="card" onclick="show('study')"><span class="icon">📚</span>Notes</div>
-            <div class="card" onclick="show('mcq')"><span class="icon">📝</span>Quiz</div>
-            <div class="card" onclick="show('formulas')"><span class="icon">∑</span>Formulas</div>
-            <div class="card" onclick="show('tiktok')"><span class="icon">🎵</span>TikTok</div>
-            <div class="card" onclick="show('agecalc')"><span class="icon">📅</span>Age</div>
-            <div class="card" onclick="show('img2pdf')"><span class="icon">📄</span>PDF</div>
-            <div class="card" onclick="show('speedtest')"><span class="icon">🚀</span>Speed</div>
-            <div class="card" onclick="show('qrcode')"><span class="icon">📱</span>QR</div>
-        </div>
+  <!-- HOME -->
+  <div id="home" class="section active">
+    <h2>Select Tool</h2>
+    <div class="grid">
+      <div class="card" onclick="openTab('study')">📚 Study Notes</div>
+      <div class="card" onclick="openTab('tiktok')">🎵 TikTok DL</div>
+      <div class="card" onclick="openTab('age')">📅 Age Calc</div>
+      <div class="card" onclick="openTab('pdf')">📄 Img to PDF</div>
+      <div class="card" onclick="openTab('speed')">🚀 Speed Test</div>
     </div>
+  </div>
 
-    <!-- === STUDY HUB (FULL READY) === -->
-    <div id="study" class="tool-section">
-        <h2>📚 Study Notes & Papers</h2>
-        <p>Select your Class to find resources:</p>
-        
-        <div class="class-selector">
-            <div class="class-btn selected" onclick="loadClass(9)">9th Class</div>
-            <div class="class-btn" onclick="loadClass(10)">10th Class</div>
-            <div class="class-btn" onclick="loadClass(11)">11th Class</div>
-            <div class="class-btn" onclick="loadClass(12)">12th Class</div>
-        </div>
+  <!-- STUDY HUB -->
+  <div id="study" class="section">
+    <h2>📚 Study Notes Finder</h2>
+    <p>Click class to find notes:</p>
+    <div class="grid">
+      <button class="btn" onclick="findNotes(9)">Class 9th Notes</button>
+      <button class="btn" onclick="findNotes(10)">Class 10th Notes</button>
+      <button class="btn" onclick="findNotes(11)">1st Year Notes</button>
+      <button class="btn" onclick="findNotes(12)">2nd Year Notes</button>
+    </div>
+    <h3>📝 Quiz</h3>
+    <p>Capital of Pakistan?</p>
+    <select id="q1"><option>Lahore</option><option value="c">Islamabad</option><option>Karachi</option></select>
+    <button class="btn" onclick="checkQuiz()">Check Answer</button>
+    <p id="quizRes" style="text-align:center;font-weight:bold;margin-top:10px"></p>
+  </div>
 
-        <div id="subjectContainer">
-            <!-- Content will be loaded here by JS -->
-            <p style="text-align:center; color:#666;">Loading subjects...</p>
-        </div>
-        
-        <div style="background:#fff3cd; padding:10px; border-radius:6px; margin-top:20px; font-size:0.9rem;">
-            <strong>Note:</strong> Download buttons will search for the best available notes online.
-        </div>
-    </div>
+  <!-- TIKTOK -->
+  <div id="tiktok" class="section">
+    <h2>🎵 TikTok Downloader</h2>
+    <input id="tkLink" placeholder="Paste Video Link...">
+    <button class="btn" onclick="dlTok()">Download</button>
+    <p id="tkStat" style="text-align:center;margin-top:10px"></p>
+    <a id="tkBtn" href="#" target="_blank" class="btn" style="display:none;background:green;text-align:center;text-decoration:none">Download Video</a>
+  </div>
 
-    <!-- === FORMULAS (FULL CONTENT) === -->
-    <div id="formulas" class="tool-section">
-        <h2>∑ Important Formulas</h2>
-        
-        <h3>Mathematics (Algebra)</h3>
-        <div class="formula-card">(a + b)² = a² + b² + 2ab</div>
-        <div class="formula-card">(a - b)² = a² + b² - 2ab</div>
-        <div class="formula-card">a² - b² = (a - b)(a + b)</div>
-        <div class="formula-card">Quadratic Formula: x = [-b ± √(b² - 4ac)] / 2a</div>
+  <!-- AGE -->
+  <div id="age" class="section">
+    <h2>📅 Age Calculator</h2>
+    <input type="date" id="dob">
+    <button class="btn" onclick="calcAge()">Calculate</button>
+    <h3 id="ageRes" style="text-align:center"></h3>
+  </div>
 
-        <h3>Physics</h3>
-        <div class="formula-card">Force (F) = ma</div>
-        <div class="formula-card">Kinetic Energy (K.E) = ½ mv²</div>
-        <div class="formula-card">Potential Energy (P.E) = mgh</div>
-        <div class="formula-card">Ohm's Law: V = IR</div>
-        
-        <h3>Chemistry</h3>
-        <div class="formula-card">Moles = Mass in grams / Molar Mass</div>
-        <div class="formula-card">pH = -log[H+]</div>
-    </div>
-
-    <!-- === MCQ QUIZ (10 QUESTIONS) === -->
-    <div id="mcq" class="tool-section">
-        <h2>📝 Knowledge Quiz</h2>
-        <div id="quizBox">
-            <p id="qText" style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;"></p>
-            <div id="opts"></div>
-            <p id="qStat" style="margin-top:10px; font-weight:bold;"></p>
-            <button id="nxtBtn" class="action-btn" onclick="nextQ()" style="display:none;">Next Question</button>
-        </div>
-    </div>
-
-    <!-- TIKTOK -->
-    <div id="tiktok" class="tool-section">
-        <h2>🎵 TikTok Downloader</h2>
-        <input id="tkUrl" placeholder="Paste Video Link...">
-        <button class="action-btn" onclick="dlTiktok()">Download No-Watermark</button>
-        <div id="tkRes" style="display:none; text-align:center; margin-top:20px;">
-            <a id="tkBtn" href="#" target="_blank" class="dwn-btn" style="background:#E1306C; width:100%; display:block;">Download MP4</a>
-        </div>
-    </div>
-
-    <!-- MORE TOOLS PAGE -->
-    <div id="more" class="tool-section">
-        <h2>➕ More Utilities</h2>
-        <div class="grid">
-            <div class="card" onclick="show('agecalc')">📅 Age Calc</div>
-            <div class="card" onclick="show('img2pdf')">📄 Img to PDF</div>
-            <div class="card" onclick="show('compressor')">🗜️ Compressor</div>
-            <div class="card" onclick="show('password')">🔐 Password</div>
-            <div class="card" onclick="show('yttags')">🏷️ YT Tags</div>
-        </div>
-    </div>
-
-    <!-- HIDDEN TOOLS (ACCESSED VIA MORE) -->
-    <div id="agecalc" class="tool-section">
-        <h2>📅 Age Calculator</h2>
-        <input type="date" id="dob">
-        <button class="action-btn" onclick="calcAge()">Calculate Age</button>
-        <p id="ageRes" style="text-align:center; font-size:1.5rem; font-weight:bold; margin-top:20px;"></p>
-    </div>
-
-    <div id="img2pdf" class="tool-section">
-        <h2>📄 Image to PDF</h2>
-        <input type="file" id="pdfIn" accept="image/*">
-        <button class="action-btn" onclick="mkPdf()">Convert</button>
-        <p id="pdfStat" style="text-align:center;"></p>
-    </div>
-
-    <div id="compressor" class="tool-section">
-        <h2>🗜️ Image Compressor</h2>
-        <input type="file" id="compIn" accept="image/*">
-        <button class="action-btn" onclick="compress()">Compress</button>
-        <div id="compRes" style="text-align:center; margin-top:10px;"></div>
-    </div>
-
-    <div id="speedtest" class="tool-section">
-        <h2>🚀 Speed Test</h2>
-        <h1 id="spdVal" style="text-align:center; font-size:3rem;">0.0</h1>
-        <p style="text-align:center;">Mbps</p>
-        <button class="action-btn" onclick="runSpd()">Start Test</button>
-    </div>
-    
-    <div id="password" class="tool-section">
-        <h2>🔐 Password Generator</h2>
-        <input type="range" id="plen" min="8" max="20" value="12">
-        <button class="action-btn" onclick="genPass()">Generate</button>
-        <p id="pRes" style="background:#eee; padding:10px; text-align:center; font-family:monospace; font-size:1.2rem;"></p>
-    </div>
-
-    <div id="yttags" class="tool-section">
-        <h2>🏷️ YT Tag Extractor</h2>
-        <input id="ytLnk" placeholder="YouTube Link...">
-        <button class="action-btn" onclick="alert('Tags: viral, video, trending, education, study')">Extract</button>
-    </div>
-    
-    <div id="qrcode" class="tool-section">
-        <h2>📱 QR Code</h2>
-        <input id="qrTx" placeholder="Text...">
-        <button class="action-btn" onclick="new QRCode(document.getElementById('qrBox'), document.getElementById('qrTx').value)">Generate</button>
-        <div id="qrBox" style="margin-top:20px; display:flex; justify-content:center;"></div>
-    </div>
+  <!-- PDF -->
+  <div id="pdf" class="section">
+    <h2>📄 Image to PDF</h2>
+    <input type="file" id="pdfFile" accept="image/*">
+    <button class="btn" onclick="makePdf()">Convert</button>
+    <p id="pdfStat" style="text-align:center"></p>
+  </div>
+  
+  <!-- SPEED -->
+  <div id="speed" class="section">
+      <h2>🚀 Speed Test</h2>
+      <button class="btn" onclick="runSpeed()">Start Test</button>
+      <h1 id="spdVal" style="text-align:center">0.0 Mbps</h1>
+  </div>
 
 </div>
-
-<footer>
-    <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
-    <p>&copy; 2025 Moazzam Tools & Study Hub</p>
-</footer>
 
 <!-- ADSTERRA CODE -->
 <script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60.js"></script>
 
 <script>
-    // --- Navigation ---
-    function show(id) {
-        document.querySelectorAll('.tool-section').forEach(e => e.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-        // Active button Logic
-        const btns = document.querySelectorAll('nav button');
-        for(let b of btns) { if(b.getAttribute('onclick').includes(id)) b.classList.add('active'); }
-        window.scrollTo(0,0);
-        if(id==='study') loadClass(9);
-        if(id==='mcq') startQuiz();
-    }
+// TABS LOGIC
+function openTab(id) {
+  document.querySelectorAll('.section').forEach(d => d.style.display='none');
+  document.getElementById(id).style.display='block';
+  window.scrollTo(0,0);
+}
 
-    // --- STUDY HUB LOGIC (SMART FINDER) ---
-    function loadClass(cls) {
-        // Highlight button
-        document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('selected'));
-        event.target.classList.add('selected'); // Note: Works on click
-        
-        const subjects = ["Physics", "Chemistry", "Mathematics", "Biology", "Computer Sci", "English"];
-        let html = "";
-        
-        subjects.forEach(sub => {
-            // Smart Search Link: Searches Google directly for the notes
-            const searchLink = `https://www.google.com/search?q=Class+${cls}+${sub}+Notes+PDF+Download+Pakistan`;
-            const paperLink = `https://www.google.com/search?q=Class+${cls}+${sub}+Past+Papers+PDF`;
-            
-            html += `
-            <div class="subject-row">
-                <div><strong>${sub}</strong></div>
-                <div>
-                    <a href="${searchLink}" target="_blank" class="view-btn">📘 Notes</a>
-                    <a href="${paperLink}" target="_blank" class="dwn-btn">📄 Papers</a>
-                </div>
-            </div>`;
-        });
-        document.getElementById('subjectContainer').innerHTML = html;
-    }
+// STUDY LOGIC
+function findNotes(cls) {
+  window.open(`https://www.google.com/search?q=Class+${cls}+Notes+PDF+Pakistan`, '_blank');
+}
+function checkQuiz() {
+  const v = document.getElementById('q1').value;
+  document.getElementById('quizRes').innerText = (v==='c') ? "Correct! ✅" : "Wrong ❌";
+}
 
-    // --- MCQ QUIZ (10 QUESTIONS) ---
-    const qData = [
-        {q:"Capital of Pakistan?", o:["Lahore","Karachi","Islamabad","Multan"], a:2},
-        {q:"Unit of Force?", o:["Joule","Newton","Watt","Volt"], a:1},
-        {q:"CPU stands for?", o:["Central Power Unit","Central Processing Unit","Control Unit"], a:1},
-        {q:"Formula of Water?", o:["HO2","H2O","O2H","HHO"], a:1},
-        {q:"Who wrote the National Anthem?", o:["Allama Iqbal","Hafeez Jalandhari","Quaid-e-Azam"], a:1},
-        {q:"Smallest planet?", o:["Mars","Mercury","Venus","Earth"], a:1},
-        {q:"Speed of Light?", o:["3x10^8 m/s","3x10^6 m/s","300 m/s"], a:0},
-        {q:"Synonym of Happy?", o:["Sad","Joyful","Angry","Cry"], a:1},
-        {q:"2 + 2 / 2 = ?", o:["2","3","4","1"], a:1},
-        {q:"Powerhouse of Cell?", o:["Nucleus","Mitochondria","Ribosome"], a:1}
-    ];
-    let qIdx = 0;
+// TIKTOK LOGIC
+async function dlTok() {
+  const u = document.getElementById('tkLink').value;
+  if(!u) return alert("Link?");
+  document.getElementById('tkStat').innerText="Searching...";
+  try {
+    const r = await fetch('https://www.tikwm.com/api/?url='+u);
+    const d = await r.json();
+    if(d.data) {
+        document.getElementById('tkStat').innerText="Found!";
+        const b = document.getElementById('tkBtn');
+        b.style.display='block'; b.href=d.data.play;
+    } else { document.getElementById('tkStat').innerText="Not Found"; }
+  } catch(e){document.getElementById('tkStat').innerText="Error";}
+}
 
-    function startQuiz() { qIdx=0; loadQ(); }
-    
-    function loadQ() {
-        if(qIdx >= qData.length) {
-            document.getElementById('quizBox').innerHTML = "<h3>🎉 Quiz Completed!</h3><button class='action-btn' onclick='location.reload()'>Restart</button>";
-            return;
-        }
-        const q = qData[qIdx];
-        document.getElementById('qText').innerText = (qIdx+1) + ". " + q.q;
-        const div = document.getElementById('opts');
-        div.innerHTML = "";
-        document.getElementById('qStat').innerText="";
-        document.getElementById('nxtBtn').style.display='none';
-        
-        q.o.forEach((opt, i) => {
-            const b = document.createElement('div');
-            b.className = 'quiz-opt';
-            b.innerText = opt;
-            b.onclick = () => check(b, i, q.a);
-            div.appendChild(b);
-        });
-    }
+// AGE LOGIC
+function calcAge() {
+  const d = document.getElementById('dob').value;
+  if(d) document.getElementById('ageRes').innerText = (new Date().getFullYear() - new Date(d).getFullYear()) + " Years";
+}
 
-    function check(el, i, ans) {
-        const all = document.querySelectorAll('.quiz-opt');
-        all.forEach(b => b.style.pointerEvents='none');
-        if(i === ans) {
-            el.classList.add('correct');
-            document.getElementById('qStat').innerText = "Correct! ✅";
-        } else {
-            el.classList.add('wrong');
-            all[ans].classList.add('correct');
-            document.getElementById('qStat').innerText = "Wrong! ❌";
-        }
-        document.getElementById('nxtBtn').style.display='block';
-    }
-    function nextQ() { qIdx++; loadQ(); }
+// PDF LOGIC
+function makePdf() {
+  const f = document.getElementById('pdfFile').files[0];
+  if(!f) return alert("Select Image");
+  const r = new FileReader();
+  r.onload = function(e) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.addImage(e.target.result,'JPEG',10,10,180,0);
+    doc.save("file.pdf");
+    document.getElementById('pdfStat').innerText="Downloaded!";
+  };
+  r.readAsDataURL(f);
+}
 
-    // --- TIKTOK ---
-    async function dlTiktok() {
-        const u = document.getElementById('tkUrl').value;
-        if(!u) return alert("Enter Link");
-        try {
-            const r = await fetch('https://www.tikwm.com/api/?url='+u);
-            const d = await r.json();
-            if(d.data) {
-                document.getElementById('tkRes').style.display='block';
-                document.getElementById('tkBtn').href = d.data.play;
-            } else alert("Not Found");
-        } catch(e){alert("Error");}
-    }
+// SPEED LOGIC
+function runSpeed() {
+    document.getElementById('spdVal').innerText="Testing...";
+    const t = new Date().getTime();
+    const i = new Image();
+    i.onload = () => {
+        const s = ((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2);
+        document.getElementById('spdVal').innerText=s+" Mbps";
+    };
+    i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;
+}
+</script>
 
-    // --- AGE CALC ---
-    function calcAge() {
-        const d = document.getElementById('dob').value;
-        if(d) document.getElementById('ageRes').innerText = (new Date().getFullYear() - new Date(d).getFullYear()) + " Years";
-    }
-
-    // --- PDF ---
-    function mkPdf() {
-        const f = document.getElementById('pdfIn').files[0];
-        if(!f) return;
-        const r = new FileReader();
-        r.onload = function(e) {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.addImage(e.target.result,'JPEG',10,10,180,0);
-            doc.save("moazzam-doc.pdf");
-            document.getElementById('pdfStat').innerText="Done!";
-        };
-        r.readAsDataURL(f);
-    }
-
-    // --- SPEED ---
-    function runSpd() {
-        document.getElementById('spdVal').innerText="...";
-        const t = new Date().getTime();
-        const i = new Image();
-        i.onload = () => {
-            const s = ((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2);
-            document.getElementById('spdVal').innerText=s;
-        };
-        i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;
-    }
-    
-    // --- PASS ---
-    function genPass() {
-        const c = "abcdefghijklmnopqrstuvwxyz0123456789!@#$";
-        let p = ""; const l = document.getElementById('plen').value;
-        for(let i=0;i<l;i++) p+=c.charAt(Math.floor(Math.random()*c.length));
-        document.getElementById('pRes').innerText=p;
-    }
-    
-    // --- COMPRESS ---
-    async function compress() {
-        const f = document.getElementById('compIn').files[0];
-        if(!f) return;
-        try {
-            const c = await imageCompression(f, {maxSizeMB:1});
-            const l = document.createElement('a');
-            l.href = URL.createObjectURL(c); l.download="min-"+f.name; l.innerText="Download"
+</body>
+    </html>
