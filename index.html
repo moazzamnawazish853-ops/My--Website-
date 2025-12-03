@@ -3,265 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moazzam All-in-One Mega Tools</title>
+<title>Moazzam Mega Tools</title>
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 <style>
   body{font-family:'Segoe UI',sans-serif;margin:0;background:#f4f7f6;color:#333;padding-bottom:80px}
-  
-  /* Header */
-  header{background:linear-gradient(135deg, #0f2027, #203a43, #2c5364);color:#fff;padding:20px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
-  header h1{margin:0;font-size:1.8rem}
-  header p{font-size:0.9rem;opacity:0.8}
-  
-  /* Navigation */
+  header{background:linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);color:#fff;padding:20px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
   nav{display:flex;gap:8px;padding:10px;background:#fff;overflow-x:auto;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  nav::-webkit-scrollbar{height:0}
-  nav button{padding:8px 16px;border:none;background:#f0f0f0;border-radius:20px;white-space:nowrap;font-weight:600;color:#555;transition:0.2s}
-  nav button.active{background:#007bff;color:#fff}
-  nav button.highlight{background:#ff9800;color:#000}
-
+  nav button{padding:8px 16px;border:none;background:#f0f0f0;border-radius:20px;white-space:nowrap;font-weight:600;color:#555}
+  nav button.active{background:#0052D4;color:#fff}
   .container{max-width:900px;margin:15px auto;padding:0 10px}
-  
-  /* Sections */
-  .section{display:none;background:#fff;padding:15px;border-radius:12px;margin-top:15px;box-shadow:0 2px 10px rgba(0,0,0,0.03);animation:fadeIn 0.4s}
+  .section{display:none;background:#fff;padding:15px;border-radius:12px;margin-top:15px;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
   .section.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  
-  h2{color:#007bff;border-bottom:2px solid #eee;padding-bottom:8px;margin-top:0;font-size:1.4rem}
-  
-  /* Inputs/Buttons */
+  h2{color:#0052D4;border-bottom:2px solid #eee;padding-bottom:8px;margin-top:0}
   input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
-  button.btn{width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px}
-  button.btn:hover{background:#0056b3}
-  
-  /* Grids & Cards */
+  button.btn{width:100%;padding:12px;background:#0052D4;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:10px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));gap:10px}
-  .card{background:#f8f9fa;padding:15px;text-align:center;border-radius:10px;cursor:pointer;border:1px solid #eee;transition:0.2s}
-  .card:hover{transform:translateY(-3px);border-color:#007bff;background:#eef7ff}
+  .card{background:#f8f9fa;padding:15px;text-align:center;border-radius:10px;cursor:pointer;border:1px solid #eee}
   .icon{font-size:26px;display:block;margin-bottom:5px}
-
-  /* Specific Tools */
   .result-box{background:#e8f5e9;padding:10px;margin-top:10px;border-radius:6px;border-left:4px solid green;display:none;word-break:break-all}
   #memeCanvas{max-width:100%;border:1px solid #ccc;margin-top:10px}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Moazzam Mega Tools</h1>
-  <p>18+ Free Tools • Study • Social • Utilities</p>
-</header>
-
+<header><h1>Moazzam Mega Tools</h1><p>18+ Free Tools • Study • Social • Utilities</p></header>
 <nav>
   <button onclick="openTab('home')" class="active">🏠 Home</button>
-  <button onclick="openTab('study')" class="highlight">📚 Study</button>
+  <button onclick="openTab('study')">📚 Study</button>
   <button onclick="openTab('social')">🔥 Social</button>
   <button onclick="openTab('utils')">🛠️ Utils</button>
-  <button onclick="openTab('fun')">🎉 Fun</button>
 </nav>
 
 <div class="container">
-
-  <!-- HOME DASHBOARD -->
+  <!-- HOME -->
   <div id="home" class="section active">
-    <h2>🔥 All Tools Menu</h2>
-    
+    <h2>🔥 All Tools</h2>
     <h3>📚 Education</h3>
     <div class="grid">
         <div class="card" onclick="openTab('study')"><span class="icon">🎓</span>Notes</div>
         <div class="card" onclick="openTab('mcq')"><span class="icon">📝</span>Quiz</div>
         <div class="card" onclick="openTab('formulas')"><span class="icon">∑</span>Formulas</div>
     </div>
-
-    <h3>🔥 Social Media</h3>
+    <h3>🔥 Social</h3>
     <div class="grid">
         <div class="card" onclick="openTab('tiktok')"><span class="icon">🎵</span>TikTok</div>
         <div class="card" onclick="openTab('thumbnail')"><span class="icon">🖼️</span>Thumbnail</div>
         <div class="card" onclick="openTab('meme')"><span class="icon">🤣</span>Meme Gen</div>
-        <div class="card" onclick="openTab('yttags')"><span class="icon">🏷️</span>YT Tags</div>
     </div>
-
-    <h3>🛠️ Daily Utilities</h3>
+    <h3>🛠️ Utils</h3>
     <div class="grid">
         <div class="card" onclick="openTab('currency')"><span class="icon">💱</span>Currency</div>
-        <div class="card" onclick="openTab('img2pdf')"><span class="icon">📄</span>Img to PDF</div>
-        <div class="card" onclick="openTab('compressor')"><span class="icon">🗜️</span>Compress</div>
+        <div class="card" onclick="openTab('img2pdf')"><span class="icon">📄</span>PDF</div>
         <div class="card" onclick="openTab('speed')"><span class="icon">🚀</span>Speed</div>
-        <div class="card" onclick="openTab('qrcode')"><span class="icon">📱</span>QR Code</div>
         <div class="card" onclick="openTab('bgremove')"><span class="icon">✂️</span>BG Remove</div>
-        <div class="card" onclick="openTab('password')"><span class="icon">🔐</span>Password</div>
-        <div class="card" onclick="openTab('wordcount')"><span class="icon">📝</span>Counter</div>
-    </div>
-
-    <h3>🎉 Fun & Life</h3>
-    <div class="grid">
-        <div class="card" onclick="openTab('age')"><span class="icon">📅</span>Age Calc</div>
-        <div class="card" onclick="openTab('love')"><span class="icon">❤️</span>Love Calc</div>
-        <div class="card" onclick="openTab('discount')"><span class="icon">💰</span>Discount</div>
+        <div class="card" onclick="openTab('age')"><span class="icon">📅</span>Age</div>
     </div>
   </div>
 
-  <!-- === 1. STUDY HUB === -->
+  <!-- TOOLS HTML -->
   <div id="study" class="section">
-    <h2>📚 Study Notes & Papers</h2>
-    <label>Select Board/City:</label>
-    <select id="boardSel">
-        <option>All Pakistan</option><option>BISE Lahore</option><option>BISE Sahiwal</option>
-        <option>BISE Faisalabad</option><option>BISE Multan</option><option>BISE Rawalpindi</option>
-        <option>Federal Board</option><option>Karachi Board</option>
-    </select>
-    <p>Find Class Notes:</p>
-    <div class="grid">
-        <button class="btn" onclick="findN(9)">9th</button>
-        <button class="btn" onclick="findN(10)">10th</button>
-        <button class="btn" onclick="findN(11)">11th</button>
-        <button class="btn" onclick="findN(12)">12th</button>
-    </div>
+    <h2>📚 Study Notes</h2>
+    <select id="boardSel"><option>All Pakistan</option><option>Lahore</option><option>Sahiwal</option><option>Faisalabad</option><option>Multan</option><option>Rawalpindi</option><option>Karachi</option></select>
+    <div class="grid"><button class="btn" onclick="findN(9)">9th</button><button class="btn" onclick="findN(10)">10th</button><button class="btn" onclick="findN(11)">11th</button><button class="btn" onclick="findN(12)">12th</button></div>
   </div>
 
-  <!-- === 2. CURRENCY === -->
   <div id="currency" class="section">
     <h2>💱 Currency Converter</h2>
-    <input type="number" id="amt" value="1" placeholder="Amount">
-    <div style="display:flex;gap:5px">
-        <select id="frC"><option value="USD">USD</option><option value="PKR">PKR</option><option value="SAR">SAR</option><option value="AED">AED</option></select>
-        <select id="toC"><option value="PKR">PKR</option><option value="USD">USD</option><option value="SAR">SAR</option></select>
-    </div>
-    <button class="btn" onclick="convCurr()">Convert</button>
-    <h3 id="currRes" style="text-align:center;color:green;margin-top:10px">...</h3>
+    <input type="number" id="amt" value="1"><select id="toC"><option value="PKR">to PKR</option><option value="USD">to USD</option></select>
+    <button class="btn" onclick="convCurr()">Convert</button><h3 id="currRes">...</h3>
   </div>
 
-  <!-- === 3. TIKTOK === -->
   <div id="tiktok" class="section">
     <h2>🎵 TikTok Downloader</h2>
-    <input id="tkUrl" placeholder="Paste TikTok Link...">
-    <button class="btn" onclick="dlTk()">Download No-Watermark</button>
+    <input id="tkUrl" placeholder="Link..."><button class="btn" onclick="dlTk()">Download</button>
     <a id="tkBtn" href="#" target="_blank" class="btn" style="display:none;background:green;text-align:center;text-decoration:none">Download Video</a>
   </div>
 
-  <!-- === 4. MEME GENERATOR === -->
   <div id="meme" class="section">
     <h2>🤣 Meme Generator</h2>
     <input type="file" id="memeF" accept="image/*" onchange="loadM()">
-    <input id="mT" placeholder="Top Text" oninput="drawM()">
-    <input id="mB" placeholder="Bottom Text" oninput="drawM()">
-    <canvas id="memeCanvas"></canvas>
-    <button class="btn" onclick="saveM()">Download Meme</button>
+    <input id="mT" placeholder="Top" oninput="drawM()"><input id="mB" placeholder="Bottom" oninput="drawM()">
+    <canvas id="memeCanvas"></canvas><button class="btn" onclick="saveM()">Download</button>
   </div>
 
-  <!-- === 5. YOUTUBE THUMBNAIL === -->
   <div id="thumbnail" class="section">
-    <h2>🖼️ YT Thumbnail</h2>
-    <input id="ytL" placeholder="Paste YouTube Link...">
-    <button class="btn" onclick="getTh()">Get Image</button>
-    <img id="thImg" src="" style="width:100%;margin-top:10px;border-radius:10px;display:none">
+    <h2>🖼️ Thumbnail</h2><input id="ytL" placeholder="YouTube Link..."><button class="btn" onclick="getTh()">Get</button><img id="thImg" src="" style="width:100%;display:none">
   </div>
 
-  <!-- === 6. IMG TO PDF === -->
   <div id="img2pdf" class="section">
-    <h2>📄 Image to PDF</h2>
-    <input type="file" id="pdfF" accept="image/*">
-    <button class="btn" onclick="mkPdf()">Convert</button>
-    <p id="pdfS" style="text-align:center"></p>
+    <h2>📄 Img to PDF</h2><input type="file" id="pdfF" accept="image/*"><button class="btn" onclick="mkPdf()">Convert</button><p id="pdfS"></p>
   </div>
 
-  <!-- === 7. BG REMOVER === -->
   <div id="bgremove" class="section">
-    <h2>✂️ Background Remover</h2>
-    <p>Use best free AI tool (Direct Link):</p>
-    <a href="https://www.remove.bg/upload" target="_blank" class="btn" style="display:block;text-align:center;text-decoration:none;background:#25D366">Open Remove.bg</a>
+    <h2>✂️ BG Remover</h2><a href="https://www.remove.bg/upload" target="_blank" class="btn" style="text-decoration:none;display:block;text-align:center;background:#25D366">Open Tool</a>
   </div>
 
-  <!-- === 8. SPEED TEST === -->
   <div id="speed" class="section">
-    <h2>🚀 Speed Test</h2>
-    <button class="btn" onclick="spd()">Start</button>
-    <h1 id="spVal" style="text-align:center">0.0 Mbps</h1>
+    <h2>🚀 Speed Test</h2><button class="btn" onclick="spd()">Start</button><h1 id="spVal" style="text-align:center">0.0</h1>
   </div>
 
-  <!-- === 9. AGE CALC === -->
   <div id="age" class="section">
-    <h2>📅 Age Calculator</h2>
-    <input type="date" id="dob">
-    <button class="btn" onclick="calcAge()">Calculate</button>
-    <h3 id="ageRes" style="text-align:center"></h3>
+    <h2>📅 Age Calc</h2><input type="date" id="dob"><button class="btn" onclick="calcAge()">Calc</button><h3 id="ageRes"></h3>
   </div>
 
-  <!-- === 10. LOVE CALC === -->
-  <div id="love" class="section">
-    <h2>❤️ Love Calculator</h2>
-    <input id="ln1" placeholder="Name 1"><input id="ln2" placeholder="Name 2">
-    <button class="btn" onclick="cLove()">Check Love %</button>
-    <h2 id="lRes" style="text-align:center;color:red"></h2>
-  </div>
-
-  <!-- === 11. COMPRESSOR === -->
-  <div id="compressor" class="section">
-    <h2>🗜️ Image Compressor</h2>
-    <input type="file" id="cpF" accept="image/*">
-    <button class="btn" onclick="cmpImg()">Compress</button>
-    <div id="cpRes" style="text-align:center"></div>
-  </div>
-
-  <!-- === 12. QR CODE === -->
-  <div id="qrcode" class="section">
-    <h2>📱 QR Generator</h2>
-    <input id="qrT" placeholder="Text...">
-    <button class="btn" onclick="mkQr()">Generate</button>
-    <div id="qrB" style="display:flex;justify-content:center;margin-top:20px"></div>
-  </div>
-
-  <!-- === 13. PASSWORD === -->
-  <div id="password" class="section">
-    <h2>🔐 Password Gen</h2>
-    <input type="range" id="plen" min="8" max="32" value="12">
-    <button class="btn" onclick="mkPass()">Generate</button>
-    <p id="pRes" class="result-box"></p>
-  </div>
-
-  <!-- === 14. DISCOUNT === -->
-  <div id="discount" class="section">
-    <h2>💰 Discount Calc</h2>
-    <input type="number" id="dp" placeholder="Price">
-    <input type="number" id="dd" placeholder="Discount %">
-    <button class="btn" onclick="cDisc()">Calculate</button>
-    <p id="dRes" style="text-align:center;font-weight:bold"></p>
-  </div>
-
-  <!-- === 15. YT TAGS === -->
-  <div id="yttags" class="section">
-    <h2>🏷️ YT Tags</h2>
-    <input id="ytT" placeholder="Link...">
-    <button class="btn" onclick="alert('Tags: viral, trending, video, new')">Extract</button>
-  </div>
-  
-  <!-- === 16. MCQ QUIZ === -->
   <div id="mcq" class="section">
-    <h2>📝 Quiz</h2>
-    <p>Capital of Pakistan?</p>
-    <select id="q1"><option>Lahore</option><option value="c">Islamabad</option></select>
-    <button class="btn" onclick="alert(document.getElementById('q1').value=='c'?'Correct!':'Wrong')">Check</button>
+    <h2>📝 Quiz</h2><p>Capital of Pakistan?</p><select id="q1"><option>Lahore</option><option value="c">Islamabad</option></select><button class="btn" onclick="alert(document.getElementById('q1').value=='c'?'Correct':'Wrong')">Check</button>
   </div>
 
-  <!-- === 17. FORMULAS === -->
   <div id="formulas" class="section">
-    <h2>∑ Formulas</h2>
-    <p><b>(a+b)²</b> = a² + b² + 2ab</p>
-    <p><b>Force</b> = ma</p>
-    <p><b>H2O</b> = Water</p>
+    <h2>∑ Formulas</h2><p><b>(a+b)²</b> = a² + b² + 2ab</p><p><b>Force</b> = ma</p>
   </div>
+    </div>
+    <!-- ADSTERRA -->
+<script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60.js"></script>
 
-  <!-- === 18. WORD COUNT === -->
-  <div id="wordcount" class="section">
-    <h2>📝 Word Counter</h2>
-    <textarea id="wcTx" rows="5" oninput="this.nextElementSibling.innerText=this.value.split(/\s+/).length+' Words'"></textarea>
-    <p>0 Words</p>
-  </div>
-
-</div>
-
-<!-- ADSTERRA CODE -->
-<script type="text/javascript" src="//pl28180463.effectivegatecpm.com/16/88/a9/1688a9aec189c2131e90c259c750bb60
+<script>
+function openTab(id){
+    document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+    window.scrollTo(0,0);
+}
+// Logic
+async function convCurr(){
+    const a=document.getElementById('amt').value, t=document.getElementById('toC').value;
+    document.getElementById('currRes').innerText="Fetching...";
+    try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const d=await r.json();
+    document.getElementById('currRes').innerText=(t=='PKR'?a*d.rates.PKR:a).toFixed(2)+" "+t;}catch(e){document.getElementById('currRes').innerText="Error";}
+}
+let mImg=new Image();
+function loadM(){const f=document.getElementById('memeF').files[0];if(f){const r=new FileReader();r.onload=(e)=>{mImg.src=e.target.result;mImg.onload=drawM};r.readAsDataURL(f);}}
+function drawM(){const c=document.getElementById('memeCanvas'),x=c.getContext('2d');c.width=400;c.height=400*(mImg.height/mImg.width);x.drawImage(mImg,0,0,c.width,c.height);x.font='30px Impact';x.fillStyle='white';x.strokeStyle='black';x.textAlign='center';x.fillText(document.getElementById('mT').value.toUpperCase(),200,40);x.strokeText(document.getElementById('mT').value.toUpperCase(),200,40);x.fillText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);x.strokeText(document.getElementById('mB').value.toUpperCase(),200,c.height-20);}
+function saveM(){const l=document.createElement('a');l.download='meme.png';l.href=document.getElementById('memeCanvas').toDataURL();l.click();}
+async function dlTk(){const u=document.getElementById('tkUrl').value;if(!u)return;try{const r=await fetch('https://www.tikwm.com/api/?url='+u);const d=await r.json();if(d.data){document.getElementById('tkBtn').style.display='block';document.getElementById('tkBtn').href=d.data.play;}}catch(e){}}
+function getTh(){const u=document.getElementById('ytL').value,m=u.match(/v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/);if(m){document.getElementById('thImg').style.display='block';document.getElementById('thImg').src=`https://img.youtube.com/vi/${m[1]}/maxresdefault.jpg`;}}
+function findN(c){window.open(`https://www.google.com/search?q=Class+${c}+Notes+${document.getElementById('boardSel').value}+PDF`,'_blank');}
+function mkPdf(){const f=document.getElementById('pdfF').files[0];if(f){const r=new FileReader();r.onload=(e)=>{const {jsPDF}=window.jspdf;const d=new jsPDF();d.addImage(e.target.result,'JPEG',10,10,180,0);d.save("file.pdf");document.getElementById('pdfS').innerText="Done!";};r.readAsDataURL(f);}}
+function spd(){document.getElementById('spVal').innerText="Testing...";const t=new Date().getTime(),i=new Image();i.onload=()=>{document.getElementById('spVal').innerText=((1000000*8)/((new Date().getTime()-t)/1000)/1024/1024).toFixed(2)+" Mbps";};i.src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg?t="+t;}
+function calcAge(){const d=document.getElementById('dob').value;if(d)document.getElementById('ageRes').innerText=(new Date().getFullYear()-new Date(d).getFullYear())+" Years";}
+</script>
+</body>
+</html>
